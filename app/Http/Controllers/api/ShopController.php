@@ -10,7 +10,7 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $shops = App\Shop::all();
+        $shops = \App\Shop::all();
         $geoJSONdata = $shops->map(function ($shop){
             return [
                 'type'       => 'Feature',

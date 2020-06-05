@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Drug;
 
 use Illuminate\Http\Request;
 
@@ -8,8 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-         $shops = \App\Shop::find(1);
-         //dd(json_encode($shops));
-        return view('home');
+        $drugs = Drug::orderBy('name','asc')->take(20)->get();
+        return view('home',compact('drugs'));
     }
 }
