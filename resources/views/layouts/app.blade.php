@@ -10,14 +10,14 @@
     <title>GéoPharma</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="./img/core-img/favicon.png">
+    <link rel="icon" href=" {{asset('./img/core-img/favicon.png')}}">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/> 
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
 
 </head>
 <body style="overflow-x: hidden">
@@ -86,15 +86,15 @@
     <!-- **** Footer Area End **** -->
     <!-- **** All JS Files ***** -->
     <!-- jQuery 2.2.4 -->
-    <script src="js/jquery.min.js"></script>
+    <script src="{{asset('js/jquery.min.js')}} "></script>
     <!-- Popper -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{asset('js/popper.min.js')}}"></script>
     <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- All Plugins -->
-    <script src="js/rehomes.bundle.js"></script>
+    <script src="{{asset('js/rehomes.bundle.js')}}"></script>
     <!-- Active -->
-    <script src="js/default-assets/active.js"></script>
+    <script src="{{asset('js/default-assets/active.js')}}"></script>
     <script src="{{asset('js/app.js')}}"></script>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"

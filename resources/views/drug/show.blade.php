@@ -33,15 +33,15 @@
             </div>
          <!-- Single Widget Area -->
             <div class="single-widget-area wow fadeInUp" data-wow-delay="200ms">
-                @forelse ($drugs as $drug)
+                @forelse ($shops as $shop)
                     <!-- Single Recent Post -->
                 <div class="single-recent-post d-flex align-items-center" style="border-bottom: solid 1px grey ">
                     <!-- Content -->
                     <div class="post-content">  
-                    <a href="single-blog.html" class="post-title">{{$drug->name}}</a>
+                    <a href="single-blog.html" class="post-title">{{$shop->name}}</a>
                         <!-- Post Meta -->
                         <div class="post-meta">
-                        <a href="#" class="post-author">{{$drug->labo}}</a>
+                        <a href="#" class="post-author">{{$shop->pivot->price.' CDF'}}</a>
                         </div>
                     </div>
                     <hr>
@@ -117,23 +117,7 @@
     favorite.addTo(map);
     controlLayer.addTo(map);
 
-    var theMarker;
-
-    map.on('click', function(e) {
-        let latitude = e.latlng.lat.toString().substring(0, 15);
-        let longitude = e.latlng.lng.toString().substring(0, 15);
-
-        if (theMarker != undefined) {
-            map.removeLayer(theMarker);
-        };
-
-        var popupContent = "Coordonnées : " + latitude + ", " + longitude + ".";
-        popupContent += '<br><a href="localhost?latitude=' + latitude + '&longitude=' + longitude + '">Générer l\'itinéire</a>';
-
-        theMarker = L.marker([latitude, longitude]).addTo(map);
-        theMarker.bindPopup(popupContent)
-        .openPopup();
-    });
+    
 </script>
     
 @endpush
