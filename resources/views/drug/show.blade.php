@@ -70,7 +70,7 @@
 
    
 
-    axios.get('{{ route('api.shops.index') }}')
+    axios.get('{{ route('api.shops.specificaldrug',['id' => $shop->id]) }}')
     .then(function (response) {
         console.log(response.data);
 
@@ -82,7 +82,7 @@
         })
         .bindPopup(function (layer) {
             
-            return layer.feature.properties.map_popup_content;
+            return layer.feature.properties.drug_info;
         }).addTo(map);
 
     })

@@ -12,7 +12,7 @@ class Shop extends Model
      * @var array
      */
     public $appends = [
-        'coordinate', 'map_popup_content', 
+        'coordinate', 'map_popup_content', 'drug_info'
     ];
 
     /**
@@ -37,6 +37,21 @@ class Shop extends Model
         $mapPopupContent = '';
         $mapPopupContent .= '<div ><strong>'.ucfirst($this->name).'</strong></div>';
         $mapPopupContent .= '<div ><strong></strong>'.$this->cover.'</div>';
+
+        return $mapPopupContent;
+    }
+
+     /**
+     * Get outlet map_popup_content attribute.
+     *
+     * @return string
+     */
+    public function getDrugInfoAttribute()
+    {   
+        $price = (isset($this->pivot->price)) ? $this->pivot->price : null ;
+        $mapPopupContent = '';
+        $mapPopupContent .= '<div ><strong>'.ucfirst($this->name).'</strong></div>';
+        $mapPopupContent .= '<div ><strong></strong>'.$price.' CDF</div>';
 
         return $mapPopupContent;
     }

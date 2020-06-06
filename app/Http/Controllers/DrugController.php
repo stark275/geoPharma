@@ -18,7 +18,7 @@ class DrugController extends Controller
         $shops = $drug->shops->sortBy(function($shop,$key){
             return $shop->pivot->price;
         })->values()->all();
-
+        
         //for ($i=0; $i < 48 ; $i++) 
             //dump($shops[$i]->pivot->price);     
          
