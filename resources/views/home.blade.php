@@ -26,7 +26,7 @@
                 <br/>
                 <ul class="list-group">
                     @forelse ($drugs as $drug)
-                        <a href="#">
+                        <a href="{{route('drug.show',['id' => $drug->id])}}">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{$drug->name}}
                             <span class="badge badge-primary badge-pill">{{$drug->labo}}</span>
@@ -40,7 +40,7 @@
 
             <div class="leaflet-sidebar-pane" id="autopan">
                 <h1 class="leaflet-sidebar-header">
-                    autopan
+                    Ma liste
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
                 <p>

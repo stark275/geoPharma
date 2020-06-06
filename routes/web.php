@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@index')->name('home');
 
 Route::get('/drugs','DrugController@index');
-Route::get('/drug/{id}','DrugController@show');
+Route::get('/drug/{id}','DrugController@show')->name('drug.show');
 
 
 Route::get('/shops','ShopController@index')->name('shop.index');

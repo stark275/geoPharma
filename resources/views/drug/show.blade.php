@@ -1,60 +1,65 @@
-@extends('layouts.app')
+@extends('layouts.sidebar')
 @section('content') 
-<style>
-    .mp{
-        width: 100%;
-        background-color: rgb(82, 83, 83);
-        height: 87vh;
-      
-    }
+ <div id="sidebar" class="leaflet-sidebar collapsed">
 
-    #map{
-        height: 85vh;
-        width: 100%;
-    }
-</style>
+        <!-- nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <!-- top aligned tabs -->
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li><a href="#autopan" role="tab"><i class="fa fa-arrows"></i></a></li>
+            </ul>
 
-<div class="row">
-    <div class="col-md-9" style="background-color:  rgb(82, 83, 83);height: 85vh; padding:0;">
-        <div id="map" class="">
-            home
-        </div>
-    </div>
-    <div class="col-md-3" style="overflow-y: scroll">
-        <div class="rehomes-sidebar-area" style="max-height: 80vh">
-            <!-- Single Widget Area -->
-            <div class="single-widget-area wow fadeInUp" data-wow-delay="200ms">
-                <div class="newsletter-form">
-                    <form action="#" method="post">
-                        <input type="email" name="nl-email" id="nlEmail" class="form-control" placeholder="Search...">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-            </div>
-         <!-- Single Widget Area -->
-            <div class="single-widget-area wow fadeInUp" data-wow-delay="200ms">
-                @forelse ($shops as $shop)
-                    <!-- Single Recent Post -->
-                <div class="single-recent-post d-flex align-items-center" style="border-bottom: solid 1px grey ">
-                    <!-- Content -->
-                    <div class="post-content">  
-                    <a href="single-blog.html" class="post-title">{{$shop->name}}</a>
-                        <!-- Post Meta -->
-                        <div class="post-meta">
-                        <a href="#" class="post-author">{{$shop->pivot->price.' CDF'}}</a>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                @empty
-                    
-                @endforelse
-
-            </div>
+            <!-- bottom aligned tabs -->
+            <ul role="tablist">
+                <li><a href="https://github.com/nickpeihl/leaflet-sidebar-v2"><i class="fa fa-github"></i></a></li>
+            </ul>
         </div>
 
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    Pharmacies possedant ....
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <br/>
+                <ul class="list-group">
+                    @forelse ($shops as $shop)
+                        <a href="#">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{$shop->name}}
+                            <span class="badge badge-primary badge-pill">{{$shop->pivot->price.' CDF'}}</span>
+                            </li>
+                        </a>    
+                    @empty
+                        
+                    @endforelse
+                </ul>  
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="autopan">
+                <h1 class="leaflet-sidebar-header">
+                    Ma liste
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    <code>Leaflet.control.sidebar({ autopan: true })</code>
+                    makes shure that the map center always stays visible.
+                </p>
+                <p>
+                    The autopan behviour is responsive as well.
+                    Try opening and closing the sidebar from this pane!
+                </p>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="messages">
+                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+        </div>
     </div>
-</div>
+
+
     
 @endsection
 
@@ -116,6 +121,15 @@
 
     favorite.addTo(map);
     controlLayer.addTo(map);
+
+     L.control.zoom({
+        position: "topright"
+    }).addTo(map);
+
+     var sidebar = L.control
+        .sidebar({ container: "sidebar", position: "right" })
+        .addTo(map)
+        .open("home");
 
     
 </script>
