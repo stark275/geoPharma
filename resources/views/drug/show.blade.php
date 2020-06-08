@@ -26,7 +26,7 @@
                 <br/>
                 <ul class="list-group">
                     @forelse ($shops as $shop)
-                        <a href="#">
+                        <a href="#" data-lat="{{$shop->latitude}}" data-lng="{{$shop->longitude}}" class="drug">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{$shop->name}}
                             <span class="badge badge-primary badge-pill">{{$shop->pivot->price.' CDF'}}</span>
@@ -73,16 +73,39 @@
         );
     var baseUrl = "{{ url('/') }}";
 
-   
+   var test = null;
 
     axios.get('{{ route('api.shops.specificaldrug',['id' => $shop->id]) }}')
     .then(function (response) {
-        console.log(response.data);
+        var test = response.data;
+        console.log(test);
+        
+        var geojsonMarkerOptions = {
+            radius: 8,
+            fillColor: "#ff7800",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
 
         L.geoJSON(response.data, {
             pointToLayer: function(geoJsonPoint, latlng) {
 
-                return L.marker(latlng);
+               // return L.marker(latlng);
+                // return L.circleMarker(latlng, geojsonMarkerOptions);
+
+                var marker = L.marker(latlng);
+                marker.on('click', () => {
+                    //$(marker._icon).addClass('selectedMarker');
+                    let price = geoJsonPoint.properties.pivot.price + 1;
+                    //console.log(response.data['features']);
+                   // console.log( geoJsonPoint.properties.id);
+                    let index = _.indexOf(response.data['features'],geoJsonPoint);
+
+                });
+
+                return marker;
             }
         })
         .bindPopup(function (layer) {
@@ -93,6 +116,35 @@
     })
     .catch(function (error) {
         console.log(error);
+    });
+
+
+
+
+    var geojsonMarkerOptions = {
+        radius: 25,
+        fillColor: "#24D238",// "#28ea3f",//"#0163FF",
+        color: "#A9F6B2", //"#0163FF",
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.6,
+        // className: 'marker-cluster'
+
+      };
+
+    
+    Array.from(document.querySelectorAll(".drug")).forEach((item) => {
+        var mark;
+        item.addEventListener('mouseenter',function () {
+            let latitude = this.dataset.lat;
+            let longitude = this.dataset.lng;
+            mark = L.circleMarker([latitude, longitude], geojsonMarkerOptions);
+            map.addLayer(mark)
+
+        });
+         item.addEventListener('mouseleave',function () {
+            map.removeLayer(mark)
+        });
     });
 
     // Favorite
@@ -130,6 +182,9 @@
         .sidebar({ container: "sidebar", position: "right" })
         .addTo(map)
         .open("home");
+
+        console.log(test);
+
 
     
 </script>
