@@ -19,6 +19,41 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{asset('style.css')}}">
 
+    <link rel="stylesheet"
+  href="{{asset('css/bootstrap.min.css')}}" 
+>
+
+    <link
+      href="{{asset('css/font-awesome.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{asset('css/leaflet.css')}}"
+      crossorigin=""
+    />
+
+    <link rel="stylesheet" href="{{asset('css/leaflet-sidebar.min.css')}}" />
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body,
+      #map {
+        height: 100%;
+        font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+      }
+
+      .lorem {
+        font-style: italic;
+        color: #aaa;
+      }
+    </style>
+
 </head>
 <body style="overflow-x: hidden">
     <!-- Preloader -->
@@ -153,11 +188,12 @@
     <script src="{{asset('js/rehomes.bundle.js')}}"></script>
     <!-- Active -->
     <script src="{{asset('js/default-assets/active.js')}}"></script>
+      <script
+      src="{{asset('js/leaflet.js')}}"
+      crossorigin=""
+    ></script>
     <script src="{{asset('js/app.js')}}"></script>
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script>
+    <script src="{{asset('js/leaflet-sidebar.min.js')}}"></script> 
     @stack('scripts')
 
 </body>
