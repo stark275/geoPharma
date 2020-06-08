@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDrugShopTable extends Migration
+class CreateDrugPlanningTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateDrugShopTable extends Migration
      */
     public function up()
     {
-        Schema::create('drug_shop', function (Blueprint $table) {
+        Schema::create('drug_planning', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('drug_id')->constrained();
-            $table->foreignId('shop_id')->constrained();
-            $table->double('price');
+            $table->unsignedBigInteger('drug_shop_id');
+            $table->foreignId('planning_id')->constrained();
+            $table->foreign('drug_shop_id')->references('id')->on('drug_shop');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateDrugShopTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drug_shop');
+        Schema::dropIfExists('drug_planning');
     }
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','HomeController@index')->name('home');
+Route::get('/','HomeController@index')->name('home0');
 
 Route::get('/drugs','DrugController@index');
 Route::get('/drug/{id}','DrugController@show')->name('drug.show');
@@ -22,3 +22,7 @@ Route::get('/drug/{id}','DrugController@show')->name('drug.show');
 Route::get('/shops','ShopController@index')->name('shop.index');
 Route::get('/map','ShopController@map')->name('shop.map');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

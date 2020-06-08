@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->safeEmail ,
                 'type' => ($faker->boolean === true) ? 'client' : 'pharmacian',
-                'password' => $faker->password,
+                'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
             ]);
         }
        

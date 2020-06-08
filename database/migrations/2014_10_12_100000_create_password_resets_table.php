@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDrugShopTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDrugShopTable extends Migration
      */
     public function up()
     {
-        Schema::create('drug_shop', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('drug_id')->constrained();
-            $table->foreignId('shop_id')->constrained();
-            $table->double('price');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateDrugShopTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drug_shop');
+        Schema::dropIfExists('password_resets');
     }
 }
