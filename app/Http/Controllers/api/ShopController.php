@@ -34,20 +34,24 @@ class ShopController extends Controller
     public function specificaldrug($id)
     {
         $drug = \App\Drug::find($id);
-        $geoJSONdata = $drug->shops->map(function($shop){
-             return [
-                'type'       => 'Feature',
-                'properties' => new ShopResource($shop),
-                'geometry'   => [
-                    'type'        => 'Point',
-                    'coordinates' => [
-                        $shop->longitude,
-                        $shop->latitude,
-                    ],
-                ],
-            ];
-        });
+        $geoJSONdata = [];
 
+        if ($drug) {
+            $geoJSONdata = $drug->shops->map(function($shop){
+                return [
+                    'type'       => 'Feature',
+                    'properties' => new ShopResource($shop),
+                    'geometry'   => [
+                        'type'        => 'Point',
+                        'coordinates' => [
+                            $shop->longitude,
+                            $shop->latitude,
+                        ],
+                    ],
+                ];
+            });
+        }
+        
         return response()->json([
             'type'     => 'FeatureCollection',
             'features' => $geoJSONdata,

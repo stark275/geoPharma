@@ -45,15 +45,18 @@
     </style>
   </head>
   <body>
-    @yield('content')
-    <div id="map"></div>
+   
+        @yield('content')
+   
 
+    <div id="map"></div>
+    
     <script
       src="{{asset('js/leaflet.js')}}"
       crossorigin=""
     ></script>
-    <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/leaflet-sidebar.min.js')}}"></script> 
+    <script src="{{asset('js/app.js')}}"></script>
     @stack('scripts')
   </body>
 </html>

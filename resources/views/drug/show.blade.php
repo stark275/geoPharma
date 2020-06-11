@@ -7,7 +7,7 @@
             <!-- top aligned tabs -->
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-                <li><a href="#autopan" role="tab"><i class="fa fa-arrows"></i></a></li>
+                <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
@@ -33,24 +33,19 @@
                             </li>
                         </a>    
                     @empty
-                        
+                         Aucune pharmacies disponible
                     @endforelse
                 </ul>  
             </div>
 
             <div class="leaflet-sidebar-pane" id="autopan">
                 <h1 class="leaflet-sidebar-header">
-                    Ma liste
+                    Mon Planning
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
-                <p>
-                    <code>Leaflet.control.sidebar({ autopan: true })</code>
-                    makes shure that the map center always stays visible.
-                </p>
-                <p>
-                    The autopan behviour is responsive as well.
-                    Try opening and closing the sidebar from this pane!
-                </p>
+
+               
+
             </div>
 
             <div class="leaflet-sidebar-pane" id="messages">
@@ -75,7 +70,7 @@
 
    var test = null;
 
-    axios.get('{{ route('api.shops.specificaldrug',['id' => $shop->id]) }}')
+    axios.get('{{ route('api.shops.specificaldrug',['id' => $drug->id]) }}')
     .then(function (response) {
         var test = response.data;
         console.log(test);

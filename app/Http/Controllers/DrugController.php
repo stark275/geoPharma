@@ -15,10 +15,14 @@ class DrugController extends Controller
     public function show($id)
     {
         $drug = \App\Drug::find($id);
-        //Pharmacies possedant un medicament particulier ($drug)
-        $shops = $drug->shops->sortBy(function($shop,$key){
-            return $shop->pivot->price;
-        })->values()->all();
+        $shops = [];
+        
+        if ($drug) {
+             $shops = $drug->shops->sortBy(function($shop,$key){
+                return $shop->pivot->price;
+            })->values()->all();
+        }
+       
 
        // dd($shops);
              

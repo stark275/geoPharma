@@ -52,6 +52,7 @@ class Shop extends Model
         $mapPopupContent = '';
         $mapPopupContent .= '<div ><strong>'.ucfirst($this->name).'</strong></div>';
         $mapPopupContent .= '<div ><strong></strong>'.$price.' CDF</div>';
+        $mapPopupContent .= '';
 
         return $mapPopupContent;
     }

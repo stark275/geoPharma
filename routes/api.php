@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['as' => 'api.', 'namespace' => 'Api'], function () {
+
+    Route::get('user/planning/{id}', 'UserController@planning')->name('user.planning');
+
     Route::get('shops', 'ShopController@index')->name('shops.index');
     Route::get('shops/drug/{id}', 'ShopController@specificaldrug')->name('shops.specificaldrug');
 });
