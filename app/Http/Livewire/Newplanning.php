@@ -8,16 +8,21 @@ use App\Planning;
 class Newplanning extends Component
 {
 
-    public $planning = '';
+    public $planningId ;
+
+    public $planningName = '';
 
     public $hasPlanning = false;
 
     public $features = [];
 
+    protected $listeners = ['featureAdded' => 'updateFeatures'];
+
     public function mount()
     {
         $this->fill([
-            'planning' => $this->getPlanningName(),
+            'planningId' => $this->getPlanning()->id,
+            'planningName' => $this->getPlanning()->name,
             'hasPlanning' => $this->hasPlanning(),
             'features' => $this->getfeatures()
         ]);
@@ -40,13 +45,18 @@ class Newplanning extends Component
         $this->reset();
     }
 
-    private function getPlanningName()
+    public function updateFeatures()
+    {
+        $this->features = $this->getfeatures();
+    }
+
+    private function getPlanning()
     {
         $plan = Planning::where('user_id','=',1)
                 ->orderBy('created_at','desc')
                 ->first();
 
-        return ($plan->name) ?  $plan->name : '';
+        return $plan;
     }
 
     private function hasPlanning()

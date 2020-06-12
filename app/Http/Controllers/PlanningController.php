@@ -24,7 +24,7 @@ class PlanningController extends Controller
     {
         return DrugPlanning::create([
             'drug_shop_id' => $request->id,
-            'planning_id' => 17 // dynamically
+            'planning_id' => $request->planningId
         ]);
 
        

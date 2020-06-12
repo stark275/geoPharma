@@ -8,6 +8,8 @@
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
                 <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
+                <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
+
             </ul>
 
             <!-- bottom aligned tabs -->
@@ -48,8 +50,17 @@
 
             </div>
 
-            <div class="leaflet-sidebar-pane" id="messages">
-                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <div class="leaflet-sidebar-pane" id="search">
+                
+                <h1 class="leaflet-sidebar-header">
+                    Trouver un Medicament
+                    <span class="leaflet-sidebar-close">
+                        <i class="fa fa-caret-left"></i>
+                    </span>
+                </h1>
+
+                Recherche
+
             </div>
         </div>
     </div>
@@ -179,22 +190,35 @@
         .addTo(map)
         .open("home");
 
-    
+    // Event Listeners
 
     document.addEventListener('click',function(e){
         if(e.target && e.target.id== 'addfeature'){
 
            let feature = this.querySelector('#addfeature').dataset.featureId
+           let planning = this.querySelector('#planning-id').dataset.planningId
 
-           axios.post('http://localhost:8000/planning/feature/add',{id : feature})
+
+           // todo: Generate path dynamically
+           axios.post('http://localhost:8000/planning/feature/add',{
+               id : feature,
+               planningId : planning
+            })
            .then(function (response) {
                console.log(response)
+
+               //flash message par exemple
+               window.livewire.emit('featureAdded',response)
            })
            .catch(function (error) {
                console.log(error)
            })
         }
     });
+
+    window.livewire.on('featureAdded', response => {
+        console.log(response.data);
+    })
 
     
 </script>

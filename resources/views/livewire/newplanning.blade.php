@@ -13,7 +13,7 @@
                         <button class="btn btn-primary">Créer</button>
                     </form>
                 @else
-                   <h4>{{$planning}}</h4>
+                   <h4 id="planning-id" data-planning-id="{{$planningId}}">{{$planningName}}</h4>
                     <ul class="list-group">
                         @forelse ($features as $f)
                             <a href="#" data-lat="{{$f['shop']->latitude}}" data-lng="{{$f['shop']->longitude}}" class="drug">
