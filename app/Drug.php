@@ -28,6 +28,6 @@ class Drug extends Model
    public function shops()
    {
        return $this->belongsToMany('App\Shop')
-                   ->withPivot('price');
+                   ->withPivot('id','price');
    }
 }

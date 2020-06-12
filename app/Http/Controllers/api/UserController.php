@@ -38,8 +38,8 @@ class UserController extends Controller
             ];
         });
 
-        return response()->json($drugs);
-
-      
+        return response()->json($drugs); 
     }
+
+   
 }

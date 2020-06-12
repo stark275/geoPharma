@@ -43,6 +43,7 @@
         color: #aaa;
       }
     </style>
+        @livewireStyles
   </head>
   <body>
    
@@ -58,5 +59,6 @@
     <script src="{{asset('js/leaflet-sidebar.min.js')}}"></script> 
     <script src="{{asset('js/app.js')}}"></script>
     @stack('scripts')
+        @livewireScripts
   </body>
 </html>

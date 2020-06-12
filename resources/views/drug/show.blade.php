@@ -44,7 +44,7 @@
                     <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 
-               
+                @livewire('newplanning')
 
             </div>
 
@@ -135,6 +135,7 @@
             let longitude = this.dataset.lng;
             mark = L.circleMarker([latitude, longitude], geojsonMarkerOptions);
             map.addLayer(mark)
+            //console.log(this.dataset)
 
         });
          item.addEventListener('mouseleave',function () {
@@ -178,8 +179,22 @@
         .addTo(map)
         .open("home");
 
-        console.log(test);
+    
 
+    document.addEventListener('click',function(e){
+        if(e.target && e.target.id== 'addfeature'){
+
+           let feature = this.querySelector('#addfeature').dataset.featureId
+
+           axios.post('http://localhost:8000/planning/feature/add',{id : feature})
+           .then(function (response) {
+               console.log(response)
+           })
+           .catch(function (error) {
+               console.log(error)
+           })
+        }
+    });
 
     
 </script>

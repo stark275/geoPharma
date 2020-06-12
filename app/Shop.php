@@ -49,10 +49,12 @@ class Shop extends Model
     public function getDrugInfoAttribute()
     {   
         $price = (isset($this->pivot->price)) ? $this->pivot->price : null ;
+        $id = (isset($this->pivot->id)) ? $this->pivot->id : null ;
+
         $mapPopupContent = '';
         $mapPopupContent .= '<div ><strong>'.ucfirst($this->name).'</strong></div>';
         $mapPopupContent .= '<div ><strong></strong>'.$price.' CDF</div>';
-        $mapPopupContent .= '';
+        $mapPopupContent .= '<div id="addfeature" class="btn btn-primary" data-feature-id="'.$id.'"> Ajouter</div>';
 
         return $mapPopupContent;
     }
@@ -66,6 +68,6 @@ class Shop extends Model
     public function drugs()
     {
         return $this->belongsToMany('App\Drug')
-                    ->withPivot('price');
+                    ->withPivot('id','price');
     }
 }
