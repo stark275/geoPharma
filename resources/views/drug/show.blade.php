@@ -215,6 +215,8 @@
 
                if (response.data == 1) {
                    console.log('you must be connected') 
+                   window.livewire.emit('featureAdded',response)
+
                }else{
                    window.livewire.emit('featureAdded',response)
                }
@@ -227,8 +229,7 @@
     });
 
     window.livewire.on('featureAdded', response => {
-          //flash message par exemple
-        console.log(response.data);
+        $("#myToast").toast('show');
     })
 
     

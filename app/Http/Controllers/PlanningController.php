@@ -22,7 +22,7 @@ class PlanningController extends Controller
 
     public function addFeature(Request $request)
     {
-        $logged = true;
+        $logged = false;
         if ($logged === true) {
          
             $row = DrugPlanning::where('drug_shop_id', '=', $request->id)
