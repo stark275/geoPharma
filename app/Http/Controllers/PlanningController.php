@@ -22,12 +22,27 @@ class PlanningController extends Controller
 
     public function addFeature(Request $request)
     {
-        return DrugPlanning::create([
-            'drug_shop_id' => $request->id,
-            'planning_id' => $request->planningId
-        ]);
+        $logged = true;
+        if ($logged === true) {
+         
+            $row = DrugPlanning::where('drug_shop_id', '=', $request->id)
+                               ->where('planning_id', '=', $request->planningId)
+                               ->first();
 
-       
+            if ($row === null) {
+                $row = DrugPlanning::create([
+                    'drug_shop_id' => $request->id,
+                    'planning_id' => $request->planningId
+                ]);
+            }else{
+                $row->update([
+                    'quatity' =>( $row->quatity + 1 )
+                ]);
+            }
+
+            return $row;
+        }  
+        return true;
     }
 
     public function test()

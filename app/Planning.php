@@ -13,7 +13,7 @@ class Planning extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function drugShops()
+    public function drugPlanning()
     {
         return $this->hasMany('App\DrugPlanning');
     }

@@ -12,6 +12,8 @@ class Newplanning extends Component
 
     public $planningName = '';
 
+    public $planningPrice = 0 ;
+
     public $hasPlanning = false;
 
     public $features = [];
@@ -26,6 +28,7 @@ class Newplanning extends Component
             'hasPlanning' => $this->hasPlanning(),
             'features' => $this->getfeatures()
         ]);
+
     }
 
     public function submit()
@@ -48,6 +51,7 @@ class Newplanning extends Component
     public function updateFeatures()
     {
         $this->features = $this->getfeatures();
+        \Flashy::message('Welcome aboard!', 'http://your-awesome-link.com');
     }
 
     private function getPlanning()
@@ -75,7 +79,7 @@ class Newplanning extends Component
                 ->first();
 
         $drugs = [];
-        $drugs = $plan->drugShops->map(function ($pivot){
+        $drugs = $plan->drugPlanning->map(function ($pivot){
             $d = \DB::table('drugs')
             ->join('drug_shop', 'drugs.id', '=', 'drug_shop.drug_id')
             ->select('drugs.*')
@@ -92,13 +96,22 @@ class Newplanning extends Component
                     ->select('price')
                     ->where('id','=',$pivot->drug_shop_id)
                     ->first();
+
+            $this->planningPrice += ($p->price * $pivot->quatity) ;
+            
             return [
                 'drug' => $d,
                 'shop' => $s,
-                'price' => $p
+                'price' => $p,
+                'qty' => $pivot->quatity
             ];
+
+          //  dd($this->planningPrice, $p->price, $pivot->quatity);
+
         });
-        //dd($drugs);
+
+        //dd($this->planningPrice);
+
        return collect($drugs)->all();
     }
 

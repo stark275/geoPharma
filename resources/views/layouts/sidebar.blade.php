@@ -52,13 +52,12 @@
 
     <div id="map"></div>
     
-    <script
-      src="{{asset('js/leaflet.js')}}"
-      crossorigin=""
-    ></script>
+    <script src="{{asset('js/jquery.min.js')}} "></script>
+    <script src="{{asset('js/leaflet.js')}}"></script>
     <script src="{{asset('js/leaflet-sidebar.min.js')}}"></script> 
     <script src="{{asset('js/app.js')}}"></script>
       @livewireScripts
+      @include('flashy::message')
       @stack('scripts')
   </body>
 </html>

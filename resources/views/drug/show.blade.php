@@ -1,5 +1,11 @@
 @extends('layouts.sidebar')
 @section('content') 
+
+<style>
+    .badge{
+        font-size: 12px;
+    }
+</style>
  <div id="sidebar" class="leaflet-sidebar collapsed">
 
         <!-- nav tabs -->
@@ -31,7 +37,7 @@
                         <a href="#" data-lat="{{$shop->latitude}}" data-lng="{{$shop->longitude}}" class="drug">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{$shop->name}}
-                            <span class="badge badge-primary badge-pill">{{$shop->pivot->price.' CDF'}}</span>
+                            <span class="badge badge-primary badge-pill">{{number_format($shop->pivot->price, 2, ',', ' ').' CDF'}}</span>
                             </li>
                         </a>    
                     @empty
@@ -207,8 +213,12 @@
            .then(function (response) {
                console.log(response)
 
-               //flash message par exemple
-               window.livewire.emit('featureAdded',response)
+               if (response.data == 1) {
+                   console.log('you must be connected') 
+               }else{
+                   window.livewire.emit('featureAdded',response)
+               }
+
            })
            .catch(function (error) {
                console.log(error)
@@ -217,6 +227,7 @@
     });
 
     window.livewire.on('featureAdded', response => {
+          //flash message par exemple
         console.log(response.data);
     })
 

@@ -8,7 +8,7 @@ class DrugPlanning extends Model
 {
     protected $table = 'drug_planning';
 
-    protected $fillable = ['drug_shop_id','planning_id'];
+    protected $fillable = ['drug_shop_id','planning_id','quatity'];
 
     public function plannings()
     {

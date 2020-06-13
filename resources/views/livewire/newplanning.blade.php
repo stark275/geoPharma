@@ -15,20 +15,34 @@
                 @else
                    <h4 id="planning-id" data-planning-id="{{$planningId}}">{{$planningName}}</h4>
                     <ul class="list-group">
+                        
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{'Médicaments'}}
+                                <span class="badge ">{{'Quantité'}}</span> 
+                                <span class="badge badge-primary badge-pill">{{'Prix'}}</span>
+                            </li>
+                            <br>
+                            
                         @forelse ($features as $f)
                             <a href="#" data-lat="{{$f['shop']->latitude}}" data-lng="{{$f['shop']->longitude}}" class="drug">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                 {{$f['drug']->name}}
-                                <span class="badge badge-primary badge-pill">{{$f['price']->price.' CDF'}}</span>
+                                <span class="badge badge-dark badge-pill ">{{$f['qty']}}</span> 
+                                <span class="badge badge-primary badge-pill">{{number_format($f['price']->price, 2, ',', ' ').' CDF'}}</span>
                                 </li>
                             </a>        
                         @empty
-                    </ul>       
-                   @endforelse
+                                
+                        @endforelse
+
+                          <br>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{' TOTAL -------------------->>>>>'}}
+                            
+                            <span class="badge badge-primary badge-pill">{{number_format($planningPrice, 2, ',', ' '). ' CDF'}}</span>
+                        </li>
+                    </ul> 
                 @endif
-
-                  
-
             </div>
         </div>
 </div>
