@@ -28,7 +28,8 @@
             <!-- top aligned tabs -->
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-                <li><a href="#autopan" role="tab"><i class="fa fa-arrows"></i></a></li>
+                <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
+                <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
@@ -59,19 +60,19 @@
                 </ul>  
             </div>
 
-            <div class="leaflet-sidebar-pane" id="autopan">
+            
+
+            <div class="leaflet-sidebar-pane" id="search">
+                
                 <h1 class="leaflet-sidebar-header">
-                    Ma liste
-                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    Trouver un Medicament
+                    <span class="leaflet-sidebar-close">
+                        <i class="fa fa-caret-left"></i>
+                    </span>
                 </h1>
-                <p>
-                    <code>Leaflet.control.sidebar({ autopan: true })</code>
-                    makes shure that the map center always stays visible.
-                </p>
-                <p>
-                    The autopan behviour is responsive as well.
-                    Try opening and closing the sidebar from this pane!
-                </p>
+
+                @livewire('search')
+
             </div>
 
             <div class="leaflet-sidebar-pane" id="messages">

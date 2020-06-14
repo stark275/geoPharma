@@ -65,7 +65,7 @@
                     </span>
                 </h1>
 
-                Recherche
+                @livewire('search')
 
             </div>
         </div>
