@@ -43,6 +43,7 @@
                             </li>
                         </ul> 
                         <a href="{{route('planning.show',$planningId)}}" class="btn btn-primary mt-3">Générer le parcour</a>
+                        <button class="btn btn-warning mt-3" onclick="hideItinerary()">Instruction</button>
                     @endif    
             </div>
         </div>

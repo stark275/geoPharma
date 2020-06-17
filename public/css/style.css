@@ -1157,7 +1157,7 @@ text-shadow: none;
 	}
 
 	/* stark */
-.leaflet-control-container .leaflet-routing-container-hide {
+.leaflet-routing-container-hide {
     display: none;
 }
 	

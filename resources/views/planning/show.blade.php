@@ -14,12 +14,13 @@
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-map active"></i></a></li>
                 <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
+                <li><a onclick="hideItinerary()"  ><i class="fa fa-map-signs"></i></a></li>
+
 
             </ul>
-
             <!-- bottom aligned tabs -->
             <ul role="tablist">
-                <li><a href="https://github.com/nickpeihl/leaflet-sidebar-v2"><i class="fa fa-github"></i></a></li>
+                <li><a href="{{route('home')}}"><i class="fa fa-home"></i></a></li>
             </ul>
         </div>
 
@@ -75,6 +76,7 @@
 
       };
 
+    var waypoints = []
     
     Array.from(document.querySelectorAll(".drug")).forEach((item) => {
         var mark;
@@ -92,9 +94,14 @@
             map.removeLayer(mark)
         });
 
-        var marker = L.marker([latitude, longitude])
-        marker.addTo(map)
+         var marker = L.marker([latitude, longitude])
+         marker.addTo(map)
+
+        waypoints.push(L.latLng(latitude, longitude))
     });
+
+
+    
 
     // Favorite
     
@@ -133,13 +140,21 @@
         .open("home");
 
     L.Routing.control({
-    waypoints: [
-        L.latLng(-4.300259, 15.311897),
-        L.latLng(-4.349323, 15.260039),
-        L.latLng(-4.339418, 15.288614)
-
-    ]
+    waypoints:waypoints
     }).addTo(map);
+
+    var itPannel = document.querySelector('.leaflet-routing-container')
+    //itPannel.classList.addTo('leaflet-routing-container-hide')
+    function hideItinerary() {
+        
+        //itPannel.classList.toggle('leaflet-routing-container-hide')
+
+        if (itPannel.style.display === "none") {
+            itPannel.style.display = "block";
+        } else {
+            itPannel.style.display = "none";
+        }
+    }
 </script>
     
 @endpush

@@ -4,6 +4,8 @@
     padding-top: 4px;
     transition: all 0.5s ease;
     box-sizing: border-box;
+    display: none;
+
 }
 
 .leaflet-control-container .leaflet-routing-container-hide {
