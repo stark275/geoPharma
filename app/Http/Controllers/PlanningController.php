@@ -9,6 +9,13 @@ use App\DrugPlanning;
 
 class PlanningController extends Controller
 {
+
+    public function show(Request $request)
+    {
+       
+        return view('planning.show');
+    }
+
     public function store(Request $request)
     {
        $plan =  Planning::create([

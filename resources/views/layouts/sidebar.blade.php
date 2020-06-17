@@ -24,6 +24,8 @@
     />
 
     <link rel="stylesheet" href="{{asset('css/leaflet-sidebar.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/leaflet-routing-machine.css')}}" />
+
 
     <style>
       body {
@@ -80,7 +82,7 @@
     <script src="{{asset('js/leaflet-sidebar.min.js')}}"></script> 
     <script src="{{asset('js/app.js')}}"></script>
       @livewireScripts
-      @include('flashy::message')
+      {{-- @include('flashy::message') --}}
       @stack('scripts')
   </body>
 </html>
