@@ -14,7 +14,7 @@ class DrugShopTableSeeder extends Seeder
         $faker = Faker\Factory::create('fr_FR');
 
         $shops = App\Shop::where('id','<',50)->get('id');
-        $drugs = App\Drug::where('id','<','400')->GET('id');
+        $drugs = App\Drug::where('id','<','400')->get('id');
 
         foreach ($shops as $shop) {
             $nbr = rand(100,200);

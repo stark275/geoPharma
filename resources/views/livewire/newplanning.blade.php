@@ -6,8 +6,8 @@
                         <form wire:submit.prevent="submit">
                             <div class="form-group">
                             <label for="exampleInputEmail1">Donnez un à votre planing </label>
-                                <input wire:model="planning" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-                                @error('planning') <span style="color: pink">{{ $message }}</span> @enderror
+                                <input wire:model="planningName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                                @error('planningName') <span style="color: pink">{{ $message }}</span> @enderror
                                 <small id="emailHelp" class="form-text text-muted">Ce nom est arbitraire.</small>
                             </div>
                             <button class="btn btn-primary">Créer</button>

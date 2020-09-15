@@ -6,8 +6,8 @@
         font-size: 12px;
     }
 </style>
- <div id="sidebar" class="leaflet-sidebar collapsed">
 
+   <div id="sidebar" class="leaflet-sidebar collapsed">
         <!-- nav tabs -->
         <div class="leaflet-sidebar-tabs">
             <!-- top aligned tabs -->
@@ -15,7 +15,9 @@
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
                 <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
                 <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
-
+                @if (Route::current()->getName() === 'planning.show')
+                    <li><a onclick="hideItinerary()"  ><i class="fa fa-map-signs"></i></a></li>   
+                @endif
             </ul>
 
             <!-- bottom aligned tabs -->
@@ -42,7 +44,7 @@
                         </a>    
                     @empty
                          Aucune pharmacies disponible
-                    @endforelse
+                     @endforelse
                 </ul>  
             </div>
 
@@ -124,9 +126,6 @@
     .catch(function (error) {
         console.log(error);
     });
-
-
-
 
     var geojsonMarkerOptions = {
         radius: 25,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Http\Request;
 use Livewire\Component;
 use App\Planning;
 
@@ -30,17 +31,17 @@ class Newplanning extends Component
         ]);
 
     }
-
+ 
     public function submit()
     {
         $this->validate([
-            'planning' => 'required|min:6'
+            'planningName' => 'required|min:6'
         ]);
 
         // Execution doesn't reach here if validation fails.
 
         Planning::create([
-            'name' => $this->planning,
+            'name' => $this->planningName,
             'description' => 'desc',
             'user_id' => 1
         ]);
@@ -57,7 +58,7 @@ class Newplanning extends Component
     private function getPlanning()
     {
         $plan = Planning::where('user_id','=',1)
-                ->orderBy('created_at','desc')
+                ->where('id',Request()->id)
                 ->first();
 
         return $plan;
@@ -75,7 +76,7 @@ class Newplanning extends Component
     public function getfeatures()
     {
         $plan = Planning::where('user_id','=',1)
-                ->orderBy('created_at','desc')
+                ->where('id',Request()->id)
                 ->first();
 
         $drugs = [];
