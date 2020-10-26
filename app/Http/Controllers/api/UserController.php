@@ -29,7 +29,7 @@ class UserController extends Controller
             $s = \DB::table('shops')
                     ->join('drug_shop', 'shops.id', '=', 'drug_shop.shop_id')
                     ->select('shops.*')
-                    ->where('drug_shop.id','=',2)
+                    ->where('drug_shop.id','=',2) // todo: rendre dynamique
                     ->get();
             return [
                 'drug' => $d,

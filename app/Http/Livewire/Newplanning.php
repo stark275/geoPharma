@@ -27,9 +27,17 @@ class Newplanning extends Component
 
         $planning = $this->getPlanningByRoute('planning.show');
 
+        if ($planning) {
+        	$planId = $planning->id;
+            $planName = $planning->name;
+        }else{
+            $planId = null;
+            $planName = null;
+        }
+
         $this->fill([
-            'planningId' => $planning->id,
-            'planningName' => $this->getCurrentPlanning()->name,
+            'planningId' => $planId,
+            'planningName' => $planName,
             'hasPlanning' => $this->hasPlanning(),
             'features' => $this->getfeatures()
         ]);
@@ -47,7 +55,7 @@ class Newplanning extends Component
         Planning::create([
             'name' => $this->planningName,
             'description' => 'desc',
-            'user_id' => 1
+            'user_id' => auth()->user()->id
         ]);
 
         $this->reset();
@@ -61,7 +69,7 @@ class Newplanning extends Component
 
     private function getPlanning()
     {
-        $plan = Planning::where('user_id','=',1)
+        $plan = Planning::where('user_id','=',auth()->user()->id)
                 ->where('id',Request()->id)
                 ->first();
 
@@ -70,7 +78,7 @@ class Newplanning extends Component
 
     private function getCurrentPlanning()
     {
-        $plan = Planning::where('user_id','=',1)
+        $plan = Planning::where('user_id','=',auth()->user()->id)
                 ->where('current','1')
                 ->first();
 
@@ -79,7 +87,7 @@ class Newplanning extends Component
 
     private function hasPlanning()
     {
-        $plan = Planning::where('user_id','=',1)
+        $plan = Planning::where('user_id','=',auth()->user()->id)
                 ->where('current','=','1')
                 ->orderBy('created_at','desc')
                 ->first();
@@ -106,39 +114,43 @@ class Newplanning extends Component
 
 
         $plan = $this->getPlanningByRoute('planning.show');
-       //todo: Si le planning nexiste pas
+       //todo: Si le planning nexiste pas (a tester)
 
         $drugs = [];
-        $drugs = $plan->drugPlanning->map(function ($pivot){
-            $d = \DB::table('drugs')
-            ->join('drug_shop', 'drugs.id', '=', 'drug_shop.drug_id')
-            ->select('drugs.*')
-            ->where('drug_shop.id','=',$pivot->drug_shop_id)
-            ->first();
 
-            $s = \DB::table('shops')
+        if ($plan) {
+            $drugs = $plan->drugPlanning->map(function ($pivot){
+                $d = \DB::table('drugs')
+                    ->join('drug_shop', 'drugs.id', '=', 'drug_shop.drug_id')
+                    ->select('drugs.*')
+                    ->where('drug_shop.id','=',$pivot->drug_shop_id)
+                    ->first();
+
+                $s = \DB::table('shops')
                     ->join('drug_shop', 'shops.id', '=', 'drug_shop.shop_id')
                     ->select('shops.*')
                     ->where('drug_shop.id','=',$pivot->drug_shop_id)
                     ->first();
 
-            $p = \DB::table('drug_shop')
+                $p = \DB::table('drug_shop')
                     ->select('price')
                     ->where('id','=',$pivot->drug_shop_id)
                     ->first();
 
-            $this->planningPrice += ($p->price * $pivot->quatity) ;
-            
-            return [
-                'drug' => $d,
-                'shop' => $s,
-                'price' => $p,
-                'qty' => $pivot->quatity
-            ];
+                $this->planningPrice += ($p->price * $pivot->quatity) ;
 
-          //  dd($this->planningPrice, $p->price, $pivot->quatity);
+                return [
+                    'drug' => $d,
+                    'shop' => $s,
+                    'price' => $p,
+                    'qty' => $pivot->quatity
+                ];
 
-        });
+                //  dd($this->planningPrice, $p->price, $pivot->quatity);
+
+            });
+            return collect($drugs)->all();
+        }
 
         //dd($this->planningPrice);
 

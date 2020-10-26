@@ -26,7 +26,7 @@ class PlanningController extends Controller
        $plan =  Planning::create([
             'name' => $request->name,
             'description' => 'Description',
-            'user_id' => 1
+            'user_id' => auth()->user()->id
         ]);
 
         return response()->json(Planning::find($plan->id));

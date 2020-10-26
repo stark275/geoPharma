@@ -179,31 +179,33 @@
 
     document.addEventListener('click',function(e){
         if(e.target && e.target.id== 'addfeature'){
+            var planningSelector = this.querySelector('#planning-id')
+         if (planningSelector != null) {
+                let feature = this.querySelector('#addfeature').dataset.featureId
+                let planning = planningSelector.dataset.planningId
+                // todo: Generate path dynamically
+                axios.post('http://localhost:8000/planning/feature/add',{
+                    id : feature,
+                    planningId : planning
+                    })
+                .then(function (response) {
+                    console.log(response)
 
-           let feature = this.querySelector('#addfeature').dataset.featureId
-           let planning = this.querySelector('#planning-id').dataset.planningId
+                    if (response.data == 1) {
+                        console.log('you must be connected') 
+                        window.livewire.emit('featureAdded',response)
 
+                    }else{
+                        window.livewire.emit('featureAdded',response)
+                    }
 
-           // todo: Generate path dynamically
-           axios.post('http://localhost:8000/planning/feature/add',{
-               id : feature,
-               planningId : planning
-            })
-           .then(function (response) {
-               console.log(response)
-
-               if (response.data == 1) {
-                   console.log('you must be connected') 
-                   window.livewire.emit('featureAdded',response)
-
-               }else{
-                   window.livewire.emit('featureAdded',response)
-               }
-
-           })
-           .catch(function (error) {
-               console.log(error)
-           })
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+         } else {
+             alert("You must be logged")
+         }
         }
     });
 

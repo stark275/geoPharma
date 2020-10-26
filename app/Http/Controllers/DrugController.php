@@ -14,6 +14,8 @@ class DrugController extends Controller
 
     public function show($id)
     {
+        //dd(auth()->user()->id);
+
         $drug = \App\Drug::find($id);
         $shops = [];
         
