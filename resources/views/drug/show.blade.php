@@ -13,7 +13,9 @@
             <!-- top aligned tabs -->
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-                <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
+                @auth
+                 <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
+                @endauth
                 <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
                 @if (Route::current()->getName() === 'planning.show')
                     <li><a onclick="hideItinerary()"  ><i class="fa fa-map-signs"></i></a></li>   
@@ -23,6 +25,26 @@
             <!-- bottom aligned tabs -->
             <ul role="tablist">
                 <li><a href="https://github.com/nickpeihl/leaflet-sidebar-v2"><i class="fa fa-github"></i></a></li>
+
+                @guest
+                <li>
+                    <a href="{{route('login')}}"><i class="fa fa-user-o"></i></a>
+                </li>            
+                @endguest
+
+                @auth
+                    <li>
+                        <a href="{{route('logout')}}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-power-off"></i>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
+                
             </ul>
         </div>
 
@@ -48,16 +70,18 @@
                 </ul>  
             </div>
 
-            <div class="leaflet-sidebar-pane" id="autopan">
-                <h1 class="leaflet-sidebar-header">
-                    Mon Planning
-                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
-                </h1>
+            @auth
+                <div class="leaflet-sidebar-pane" id="autopan">
+                    <h1 class="leaflet-sidebar-header">
+                        Mon Planning
+                        <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                    </h1>
 
-                @livewire('newplanning')
+                    @livewire('newplanning')
 
-            </div>
-
+                </div>
+            @endauth
+         
             <div class="leaflet-sidebar-pane" id="search">
                 
                 <h1 class="leaflet-sidebar-header">
@@ -184,7 +208,12 @@
     });
 
     window.livewire.on('featureAdded', response => {
-        $("#myToast").toast('show');
+        let myToast = $("#myToast")
+        myToast.toast('show')
+
+        setTimeout(() => {
+            myToast.toast('hide')
+        }, 3000);
     })
 
     

@@ -23,9 +23,13 @@ class Newplanning extends Component
 
     public function mount()
     {
+        // dd($this->getCurrentPlanning());
+
+        $planning = $this->getPlanningByRoute('planning.show');
+
         $this->fill([
-            'planningId' => $this->getPlanning()->id,
-            'planningName' => $this->getPlanning()->name,
+            'planningId' => $planning->id,
+            'planningName' => $this->getCurrentPlanning()->name,
             'hasPlanning' => $this->hasPlanning(),
             'features' => $this->getfeatures()
         ]);
@@ -64,6 +68,15 @@ class Newplanning extends Component
         return $plan;
     }
 
+    private function getCurrentPlanning()
+    {
+        $plan = Planning::where('user_id','=',1)
+                ->where('current','1')
+                ->first();
+
+        return $plan;
+    }
+
     private function hasPlanning()
     {
         $plan = Planning::where('user_id','=',1)
@@ -73,11 +86,27 @@ class Newplanning extends Component
         return (isset($plan->current) && $plan->current == '1') ?  true : false;
     }
 
+    private function getPlanningByRoute($routeName)
+    {
+        $route = \Route::current()->getName();
+        switch ($route) {
+            case $routeName:
+                $plan = $this->getPlanning();
+                break;
+            default:
+                $plan = $this->getCurrentPlanning();
+                break;
+        }
+
+        return $plan;
+    }
+
     public function getfeatures()
     {
-        $plan = Planning::where('user_id','=',1)
-                ->where('id',Request()->id)
-                ->first();
+
+
+        $plan = $this->getPlanningByRoute('planning.show');
+       //todo: Si le planning nexiste pas
 
         $drugs = [];
         $drugs = $plan->drugPlanning->map(function ($pivot){

@@ -10,6 +10,11 @@ use App\DrugPlanning;
 class PlanningController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show(Request $request)
     {
        
@@ -29,7 +34,7 @@ class PlanningController extends Controller
 
     public function addFeature(Request $request)
     {
-        $logged = false;
+        $logged = true;
         if ($logged === true) {
          
             $row = DrugPlanning::where('drug_shop_id', '=', $request->id)

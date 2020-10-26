@@ -20,7 +20,7 @@
         </div>
     </div>
 </div> --}}
-
+    <div id="map"></div>
     <div id="sidebar" class="leaflet-sidebar collapsed">
 
         <!-- nav tabs -->
@@ -28,13 +28,35 @@
             <!-- top aligned tabs -->
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
-                <li><a href="#autopan" role="tab"><i class="fa fa-map"></i></a></li>
+                @auth
+                    <li><a href="#plannings" role="tab"><i class="fa fa-map"></i></a></li>
+                @endauth
                 <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
             </ul>
 
             <!-- bottom aligned tabs -->
             <ul role="tablist">
                 <li><a href="https://github.com/nickpeihl/leaflet-sidebar-v2"><i class="fa fa-github"></i></a></li>
+
+                @guest
+                <li>
+                    <a href="{{route('login')}}"><i class="fa fa-user-o"></i></a>
+                </li>            
+                @endguest
+
+                @auth
+                    <li>
+                        <a href="{{route('logout')}}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-power-off"></i>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
+                
             </ul>
         </div>
 
@@ -75,12 +97,12 @@
 
             </div>
 
-            <div class="leaflet-sidebar-pane" id="messages">
-                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <div class="leaflet-sidebar-pane" id="plannings">
+                <h1 class="leaflet-sidebar-header">Mes plannings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
             </div>
         </div>
     </div>
-     <div id="map"></div>
+     
 @endsection
 
 @push('scripts')

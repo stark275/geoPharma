@@ -12,7 +12,7 @@
                             </div>
                             <button class="btn btn-primary">Créer</button>
                         </form>
-                    @elseif ( Route::current()->getName() === 'planning.show')
+                    @else
                     <h4 id="planning-id" data-planning-id="{{$planningId}}">{{$planningName}}</h4>
                         <ul class="list-group">
                             
