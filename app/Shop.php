@@ -35,8 +35,15 @@ class Shop extends Model
     public function getMapPopupContentAttribute()
     {
         $mapPopupContent = '';
+        $mapPopupContent .= '<div class="card" >';
+        $mapPopupContent .= '<div class="card-body">';
+        $mapPopupContent .= '<img class="card-img" src="img/bg-img/9.jpg" >';
         $mapPopupContent .= '<div ><strong>'.ucfirst($this->name).'</strong></div>';
         $mapPopupContent .= '<div ><strong></strong>'.$this->cover.'</div>';
+        $mapPopupContent .= '<a href="'.route('shop.show',$this->id).'" class="btn btn-primary"> Visiter </a>';
+        $mapPopupContent .= '</div>';
+        $mapPopupContent .= '</div>';
+
 
         return $mapPopupContent;
     }

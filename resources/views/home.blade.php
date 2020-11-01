@@ -112,7 +112,8 @@
     //This ---------------------------------------------------
     axios.get('{{ route('api.shops.index') }}')
     .then(function (response) {
-        console.log(response.data);
+        console.log(response)
+        debugger
 
         L.geoJSON(response.data, {
             pointToLayer: function(geoJsonPoint, latlng) {
@@ -123,7 +124,7 @@
         .bindPopup(function (layer) {
             
             return layer.feature.properties.map_popup_content;
-        }).addTo(map);
+        }, {className: 'devoxx-popup-container'}).addTo(map);
 
     })
     .catch(function (error) {

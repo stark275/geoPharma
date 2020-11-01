@@ -7,19 +7,13 @@ use App\{Shop,User};
 
 class ShopController extends Controller
 {
-    public function index(Shop $shop)
+    public function show($id)
     {
-        
-       $shops = $shop::where('id','<','7')->get();
-
+        $shop = \App\Shop::find($id);
+        dd($shop);
         return view('shop.index',compact('shops'));
     }
 
-    public function map()
-    {
-        //dd(route('shop.map'));
-        return view('shop.map');
-    }
 
 
 }

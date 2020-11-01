@@ -1160,4 +1160,12 @@ text-shadow: none;
 .leaflet-routing-container-hide {
     display: none;
 }
-	
+
+.devoxx-popup-container {
+	width: 200px ;
+	font-size: 21px;
+}
+.devoxx-popup-container .leaflet-popup-content-wrapper, .devoxx-popup-container .leaflet-popup-tip {
+	background-color: black;
+	color: white
+}

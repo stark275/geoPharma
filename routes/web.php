@@ -23,9 +23,8 @@ Route::post('/planning/feature/add', 'PlanningController@addFeature');
 Route::get('/drugs','DrugController@index');
 Route::get('/drug/{id}','DrugController@show')->name('drug.show');
 
-Route::get('/shops','ShopController@index')->name('shop.index');
-Route::get('/map','ShopController@map')->name('shop.map');
-
+Route::get('/shops','HomeController@index')->name('shop.index');
+Route::get('/shop/{id}','ShopController@show')->name('shop.show');
 
 
 

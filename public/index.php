@@ -13,7 +13,8 @@ define('LARAVEL_START', microtime(true));
 |--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
-|
+|320256_Mik E4:8D:8C:8C:91:61
+ 320256@Mik
 | Composer provides a convenient, automatically generated class loader for
 | our application. We just need to utilize it! We'll simply require it
 | into the script here so that we don't have to worry about manual

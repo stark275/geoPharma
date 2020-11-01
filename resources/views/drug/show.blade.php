@@ -76,9 +76,9 @@
                         Mon Planning
                         <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                     </h1>
-
-                    @livewire('newplanning')
-
+                   
+                        @livewire('newplanning')
+                   
                 </div>
             @endauth
          
@@ -95,10 +95,7 @@
 
             </div>
         </div>
-    </div>
-
-
-    
+    </div> 
 @endsection
 
 @push('scripts')
