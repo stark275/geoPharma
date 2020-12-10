@@ -134,24 +134,19 @@
         var mark;
         var latitude = item.dataset.lat;
         var longitude = item.dataset.lng;
-
-        item.addEventListener('mouseenter',function () {
-            
+        item.addEventListener('mouseenter',function () { 
             mark = L.circleMarker([latitude, longitude], geojsonMarkerOptions);
             map.addLayer(mark)
             //console.log(this.dataset)
-
         });
          item.addEventListener('mouseleave',function () {
             map.removeLayer(mark)
         });
-
          var marker = L.marker([latitude, longitude])
          marker.addTo(map)
 
         waypoints.push(L.latLng(latitude, longitude))
     });
-
     // Routing machine
     L.Routing.control({
     waypoints:waypoints,

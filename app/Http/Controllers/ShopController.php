@@ -10,8 +10,9 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = \App\Shop::find($id);
-        dd($shop);
-        return view('shop.index',compact('shops'));
+        $drugs = $shop->drugs()->paginate(12);
+
+        return view('shop.show',compact('shop','drugs'));
     }
 
 

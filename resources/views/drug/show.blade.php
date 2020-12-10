@@ -73,7 +73,7 @@
             @auth
                 <div class="leaflet-sidebar-pane" id="autopan">
                     <h1 class="leaflet-sidebar-header">
-                        Mon Planning
+                        Mon Ordonnance
                         <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
                     </h1>
                    

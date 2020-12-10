@@ -13,12 +13,12 @@ class ShopTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        $mapCenterLatitude = -4.340249213281;
-        $mapCenterLongitude = 15.315284729003;
-        $minLatitude = $mapCenterLatitude - 0.05;
-        $maxLatitude = $mapCenterLatitude + 0.05;
-        $minLongitude = $mapCenterLongitude - 0.07;
-        $maxLongitude = $mapCenterLongitude + 0.07;
+        $mapCenterLatitude = -4.305119791614;
+        $mapCenterLongitude = 15.313426363769;
+        $minLatitude = $mapCenterLatitude - 0.005;
+        $maxLatitude = $mapCenterLatitude + 0.005;
+        $minLongitude = $mapCenterLongitude - 0.007;
+        $maxLongitude = $mapCenterLongitude + 0.007;
 
         $users = App\User::where('type','pharmacian')->get('id');
             

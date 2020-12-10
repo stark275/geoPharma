@@ -26,7 +26,7 @@ class ShopController extends Controller
         });
     
         return response()->json([
-           // 'type'     => 'FeatureCollection',
+             'type'     => 'FeatureCollection',
              'features' => $geoJSONdata
         ]);
     }
@@ -36,7 +36,7 @@ class ShopController extends Controller
         $drug = \App\Drug::find($id);
         $geoJSONdata = [];
 
-        dd($drug);
+        //dd($drug);
 
         if ($drug) {
             $geoJSONdata = $drug->shops->map(function($shop){
