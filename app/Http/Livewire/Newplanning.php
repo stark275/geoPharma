@@ -43,6 +43,15 @@ class Newplanning extends Component
         ]);
 
     }
+
+    public function close()
+    {
+        Planning::where('id', $this->planningId)->update([
+            'current' => '0'
+        ]);
+
+        $this->hasPlanning = false;
+    }
  
     public function submit()
     {
@@ -59,6 +68,7 @@ class Newplanning extends Component
         ]);
 
         $this->reset();
+        $this->mount();
     }
 
     public function updateFeatures()

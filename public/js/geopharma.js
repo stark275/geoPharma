@@ -1,7 +1,7 @@
 var map = L.map('map').setView([
-    -4.340249213281,
-    15.315284729003],
-    12.5
+    -4.307121681575,
+    15.323384988766],
+    15
 );
 var baseUrl = "{{ url('/') }}";
 
@@ -27,7 +27,6 @@ var mainLayer = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.
 var controlLayer = L.control.layers({
     'Favorite': favorite,
     'Wikimedia': mainLayer
-
 });
 
 favorite.addTo(map);

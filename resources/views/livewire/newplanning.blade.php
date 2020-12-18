@@ -5,7 +5,7 @@
                     @if ($hasPlanning == false)
                         <form wire:submit.prevent="submit">
                             <div class="form-group">
-                            <label for="exampleInputEmail1">Donnez un à votre planing </label>
+                            <label for="exampleInputEmail1">Nommez votre Ordonnance </label>
                                 <input wire:model="planningName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
                                 @error('planningName') <span style="color: pink">{{ $message }}</span> @enderror
                                 <small id="emailHelp" class="form-text text-muted">Ce nom est arbitraire.</small>
@@ -42,8 +42,10 @@
                                 <span class="badge badge-primary badge-pill">{{number_format($planningPrice, 2, ',', ' '). ' CDF'}}</span>
                             </li>
                         </ul> 
-                        <a href="{{route('planning.show',$planningId)}}" class="btn btn-primary mt-3">Générer le parcour</a>
+                        <a href="{{route('planning.show',$planningId)}}" style="color: white" class="btn btn-primary mt-3">Générer le parcour</a>
                         <button class="btn btn-warning mt-3" onclick="hideItinerary()">Instruction</button>
+                        <button  class="btn btn-danger mt-1" wire:click="close">Terminer</button>
+
                     @endif    
             </div>
         </div>

@@ -96,10 +96,13 @@
                 @livewire('search')
 
             </div>
-
-            <div class="leaflet-sidebar-pane" id="plannings">
-                <h1 class="leaflet-sidebar-header">Mes plannings<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            @auth
+                <div class="leaflet-sidebar-pane" id="plannings">
+                <h1 class="leaflet-sidebar-header">Ordonnance<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                @livewire('newplanning')
             </div>
+            @endauth
+            
         </div>
     </div>
      
